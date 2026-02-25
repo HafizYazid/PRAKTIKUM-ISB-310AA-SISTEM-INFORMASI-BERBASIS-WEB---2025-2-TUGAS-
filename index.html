@@ -19,6 +19,7 @@
         <div class="flex lg:flex-1">
             <a href="#" class="-m-1.5 p-1.5">
             <img src="https://cdn.cdnstep.com/LSJXhjHGyP7SjpwhBlHm/cover.thumb256.webp" alt="" class="h-20 w-20" />
+            <a href="#" class=" ms-3 text-sm/6 font-semibold text-white d-flex align-items-center">Bubu Shoes</a>
             </a>
         </div>
         <div class="flex lg:hidden">
@@ -31,10 +32,18 @@
         </div>
         <div class="hidden lg:flex lg:gap-x-12">
             <a href="#" class="text-sm/6 font-semibold text-white">Homepage</a>
-      
         </div>
         <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-            <a href="#" class="text-sm/6 font-semibold text-white">Bubu Shoes</a>
+             <button 
+            class="btn btn-outline-light btn-sm rounded-pill me-4"
+            data-bs-toggle="modal"
+            data-bs-target="#wishlistModal"
+            onclick="tampilkanWishlist()"
+            >
+            ⭐️ Wishlist(<span id="wishlist-count">0</span>)
+            </button>
+            
+            <button id="btn-theme" class="btn btn-outline-light rounded-pill btn-sm">🌙 Mode Gelap</button>
         </div>
         </nav>
     </header>
@@ -96,50 +105,78 @@
         </div>
      </div>
 
-     <div class="catalog" style="padding: 3rem; width: 80%; margin: auto;">
+        <div class="catalog" style="padding: 3rem; width: 80%; margin: auto;">
         <div class="headcatalog" style="margin-bottom: 2rem;">
             <h4>Product Catalog</h4>
         </div>
         <div class="product">
-             <div class="row">
-            <div class="col-md-4 mb-3">
-                <div class="card" style="width: auto;">
-                    <img src="https://www.newbalance.co.id/media/catalog/product/cache/b444f50a64a092a2138a5e1cbd49879a/0/8/0888-NEWU204L1ZH01808H-1.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">New Balance 204L Unisex Sneakers Shoes - Ivory</h5>
-                        <p class="card-text">Rp. 1.699.000</p>
-                        <p>Stok: 10</p>
-                        <a href="#" class="btn btn-primary">Detail</a>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <div class="card" style="width: auto;">
+                        <img src="https://www.newbalance.co.id/media/catalog/product/cache/b444f50a64a092a2138a5e1cbd49879a/0/8/0888-NEWU204L1ZH01808H-1.jpg" class="card-img-top" alt="NB Ivory">
+                        <div class="card-body">
+                            <h5 class="card-title">New Balance 204L Unisex Sneakers Shoes - Ivory</h5>
+                            <p class="card-text harga-text">Rp. 1.699.000</p>
+                            <p class="card-text stok-text">Stok: 10</p>
+                            <div class="d-flex justify-content-between">
+                                <button class="btn btn-primary btn-detail w-50 me-2">Beli</button>
+                                <button class="btn btn-outline-danger btn-wishlist w-50">❤️ Wishlist</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-md-4 mb-3">
-                <div class="card" style="width: auto;">
-                    <img src="https://www.newbalance.co.id/media/catalog/product/cache/b444f50a64a092a2138a5e1cbd49879a/0/8/0888-NEWURC564KYGRE10H-1.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">New Balance 740 Boys Kids Sneakers Shoes - Grey</h5>
-                        <p class="card-text">Rp. 719.400 </p>
-                        <p>Stok: 2</p>
-                        <a href="#" class="btn btn-primary">Detail</a>
+                <div class="col-md-4 mb-3">
+                    <div class="card" style="width: auto;">
+                        <img src="https://www.newbalance.co.id/media/catalog/product/cache/b444f50a64a092a2138a5e1cbd49879a/0/8/0888-NEWURC564KYGRE10H-1.jpg" class="card-img-top" alt="NB Grey">
+                        <div class="card-body">
+                            <h5 class="card-title">New Balance 740 Boys Kids Sneakers Shoes - Grey</h5>
+                            <p class="card-text harga-text">Rp. 719.400 </p>
+                            <p class="card-text stok-text">Stok: 2</p>
+                            <div class="d-flex justify-content-between">
+                                <button class="btn btn-primary btn-detail w-50 me-2">Beli</button>
+                                <button class="btn btn-outline-danger btn-wishlist w-50">❤️ Wishlist</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-md-4 mb-3">
-                <div class="card" style="width: auto;">
-                    <img src="https://www.newbalance.co.id/media/catalog/product/cache/b444f50a64a092a2138a5e1cbd49879a/0/8/0888-NEWG7407LM12W03H-1.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">New Balance 370 Unisex Sneakers Shoes - Pink</h5>
-                        <p class="card-text">Rp. 1.799.000</p>
-                        <p>Stok: 3</p>
-                        <a href="#" class="btn btn-primary">Detail</a>
+                <div class="col-md-4 mb-3">
+                    <div class="card" style="width: auto;">
+                        <img src="https://www.newbalance.co.id/media/catalog/product/cache/b444f50a64a092a2138a5e1cbd49879a/0/8/0888-NEWG7407LM12W03H-1.jpg" class="card-img-top" alt="NB Pink">
+                        <div class="card-body">
+                            <h5 class="card-title">New Balance 370 Unisex Sneakers Shoes - Pink</h5>
+                            <p class="card-text harga-text">Rp. 1.799.000</p>
+                            <p class="card-text stok-text">Stok: 3</p>
+                            <div class="d-flex justify-content-between">
+                                <button class="btn btn-primary btn-detail w-50 me-2">Beli</button>
+                                <button class="btn btn-outline-danger btn-wishlist w-50">❤️ Wishlist</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="modal fade" id="wishlistModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Daftar Wishlist Saya</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+            </div>
+            <div class="modal-body">
+                <ul class="list-group" id="daftar-wishlist">
+                    </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                <button type="button" class="btn btn-danger" onclick="hapuswishlist()">Kosongkan</button>
+            </div>
         </div>
-     </div>
+    </div>
+</div>
 
       <footer class="bg-gray-900 text-gray-300 py-12 mt-10">
         <div class="container mx-auto px-6 lg:px-8">
@@ -188,6 +225,6 @@
             </div>
         </div>
     </footer>
-
+    <script src="script.js"></script>
 </body>
 </html>
