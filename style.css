@@ -126,3 +126,22 @@ body.dark-mode .list-group-item {
 body.dark-mode .btn-close {
     filter: invert(1); 
 }
+
+
+/* ========================================= */
+/* TAMBAHAN CSS UNTUK HALAMAN LOGIN          */
+/* ========================================= */
+
+.login-body {
+    background-size: cover; 
+    background-position: center;
+}
+
+.login-card {
+    width: 100%; 
+    max-width: 400px;
+}
+
+.login-logo {
+    object-fit: cover;
+}

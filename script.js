@@ -142,4 +142,10 @@ function hapuswishlist() {
     }
 }
 
+function prosesLogout() {
+    if (confirm("Apakah anda yakin ingin logout?")) {
+        window.location.href = 'logout.php';
+    }
+}
+
 aktifkanTombolWishlist();

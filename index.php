@@ -1,15 +1,36 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['isLoggedIn']) || $_SESSION['isLoggedIn'] !== true) {
+    header("Location: login.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homepage Website</title>
-    
+    <script>
+        if (localStorage.getItem('isLoggedIn') !== 'true') {
+            window.location.href = 'login.php'; 
+        }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+
+   <script>
+      
+        if (localStorage.getItem('isLoggedIn') !== 'true') {
+            window.location.href = 'login.html'; 
+        }
+    </script>
+
 </head>
 <body>
     
@@ -19,7 +40,7 @@
         <div class="flex lg:flex-1">
             <a href="#" class="-m-1.5 p-1.5">
             <img src="https://cdn.cdnstep.com/LSJXhjHGyP7SjpwhBlHm/cover.thumb256.webp" alt="" class="h-20 w-20" />
-            <a href="#" class=" ms-3 text-sm/6 font-semibold text-white d-flex align-items-center">Bubu Shoes</a>
+            <a href="#" class=" ms-3 text-sm/6 font-semibold text-dark d-flex align-items-center">Bubu Shoes</a>
             </a>
         </div>
         <div class="flex lg:hidden">
@@ -35,7 +56,7 @@
         </div>
         <div class="hidden lg:flex lg:flex-1 lg:justify-end">
              <button 
-            class="btn btn-outline-light btn-sm rounded-pill me-4"
+            class="btn btn-outline-dark btn-sm rounded-pill me-4"
             data-bs-toggle="modal"
             data-bs-target="#wishlistModal"
             onclick="tampilkanWishlist()"
@@ -43,7 +64,9 @@
             ⭐️ Wishlist(<span id="wishlist-count">0</span>)
             </button>
             
-            <button id="btn-theme" class="btn btn-outline-light rounded-pill btn-sm">🌙 Mode Gelap</button>
+            <button id="btn-theme" class="btn btn-outline-dark rounded-pill btn-sm">🌙 Mode Gelap</button>
+             <a href="logout.php" class="btn btn-danger rounded-pill btn-sm ms-4">Logout</a>
+        </div>
         </div>
         </nav>
     </header>
@@ -58,7 +81,7 @@
             <img src="https://cdn.cdnstep.com/LSJXhjHGyP7SjpwhBlHm/cover.thumb256.webp" alt="" class=""/>
             </a>
             </div>
-            <h1 class="text-5xl font-semibold tracking-tight text-balance text-white sm:text-7xl">Chossee The Product Then U Like</h1>
+            <h1 class="text-5xl font-semibold tracking-tight text-balance text-dark sm:text-7xl">Chossee The Product Then U Like</h1>
             <p class="mt-8 text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">Menyediakan sepatu berkualitas terbaik dengan desain modern untuk kenyamanan langkah Anda sehari-hari.</p>
             <div class="mt-10 flex items-center justify-center gap-x-6">
             <a href="#" class="rounded-md bg-stone-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-stone-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-stone-500">Buy Product</a>
