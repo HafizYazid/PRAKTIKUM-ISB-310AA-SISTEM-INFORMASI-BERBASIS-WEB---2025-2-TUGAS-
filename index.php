@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['isLoggedIn']) || $_SESSION['isLoggedIn'] !== true) {
+    header("Location: login.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -28,6 +37,11 @@
                     </li>
                     <li class="nav-item me-3">
                         <a class="nav-link" href="#daftar">Daftar</a>
+                    </li>
+                    <li class="nav-item me-3 ms-3 mt-1 align-self-center">
+                        <a class="btn btn-danger btn-sm rounded-pill px-3" href="logout.php">
+                            <i class="bi bi-box-arrow-right"></i> Logout
+                        </a>
                     </li>
                 </ul>
             </div>
