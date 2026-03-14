@@ -16,7 +16,7 @@ FitZone Gym adalah aplikasi manajemen gym berbasis web yang mengimplementasikan 
 - `css/style.css`: Kustomisasi tema warna FitZone.
 
 ## Note
-Login menggunakan kredensial: **User: admin | Pass: 12345**.
+Login menggunakan kredensial: **User: admin | Pass: 123**.
 
 ---
 © 2026 Mohd Hafiz Yazid Nasution - Sistem Informasi Itenas.
