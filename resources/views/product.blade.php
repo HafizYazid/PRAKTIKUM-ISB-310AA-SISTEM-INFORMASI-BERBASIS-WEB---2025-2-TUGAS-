@@ -110,58 +110,87 @@
 
         <div class="catalog" style="padding: 3rem; width: 80%; margin: auto;">
         <div class="headcatalog" style="margin-bottom: 2rem;">
-            <h4>Product Catalog</h4>
+            <div class="d-flex justify-content-between mb-3">
+                <h4>Product Catalog</h4>
+                <button type="button" class="btn btn-primary" style="width: 250px;" data-bs-toggle="modal" 
+                data-bs-target="#tambahProdukModal">Tambah Product</button>
+            </div>
         </div>
         <div class="product">
             <div class="row">
-                <div class="col-md-4 mb-3">
+                 @foreach ($products as $p )
+        <div class="col-md-4 mb-3">
                     <div class="card" style="width: auto;">
                         <img src="https://www.newbalance.co.id/media/catalog/product/cache/b444f50a64a092a2138a5e1cbd49879a/0/8/0888-NEWU204L1ZH01808H-1.jpg" class="card-img-top" alt="NB Ivory">
                         <div class="card-body">
-                            <h5 class="card-title">New Balance 204L Unisex Sneakers Shoes - Ivory</h5>
-                            <p class="card-text harga-text">Rp. 1.699.000</p>
-                            <p class="card-text stok-text">Stok: 10</p>
-                            <div class="d-flex justify-content-between">
-                                <button class="btn btn-primary btn-detail w-50 me-2">Beli</button>
-                                <button class="btn btn-outline-danger btn-wishlist w-50">❤️ Wishlist</button>
-                            </div>
+                           <h5 class="card-title">{{ $p->product_name }}</h5>
+                    <span>{{ $p->category->category_name }}</span>
+                    <p class="card-text">Rp. {{ number_format($p->product_price, 0, ',', '.') }}</p>
+                    <p class="card-text">Stok: {{ $p->product_stock }}</p>
+                    <div class="d-flex justify-content-between">
+                        <button class="btn btn-primary btn-detail w-50 me-2">Beli</button>
+                        <button class="btn btn-outline-danger btn-wishlist w-50">❤️ Wishlist</button>
+                    </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-md-4 mb-3">
-                    <div class="card" style="width: auto;">
-                        <img src="https://www.newbalance.co.id/media/catalog/product/cache/b444f50a64a092a2138a5e1cbd49879a/0/8/0888-NEWURC564KYGRE10H-1.jpg" class="card-img-top" alt="NB Grey">
-                        <div class="card-body">
-                            <h5 class="card-title">New Balance 740 Boys Kids Sneakers Shoes - Grey</h5>
-                            <p class="card-text harga-text">Rp. 719.400 </p>
-                            <p class="card-text stok-text">Stok: 2</p>
-                            <div class="d-flex justify-content-between">
-                                <button class="btn btn-primary btn-detail w-50 me-2">Beli</button>
-                                <button class="btn btn-outline-danger btn-wishlist w-50">❤️ Wishlist</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4 mb-3">
-                    <div class="card" style="width: auto;">
-                        <img src="https://www.newbalance.co.id/media/catalog/product/cache/b444f50a64a092a2138a5e1cbd49879a/0/8/0888-NEWG7407LM12W03H-1.jpg" class="card-img-top" alt="NB Pink">
-                        <div class="card-body">
-                            <h5 class="card-title">New Balance 370 Unisex Sneakers Shoes - Pink</h5>
-                            <p class="card-text harga-text">Rp. 1.799.000</p>
-                            <p class="card-text stok-text">Stok: 3</p>
-                            <div class="d-flex justify-content-between">
-                                <button class="btn btn-primary btn-detail w-50 me-2">Beli</button>
-                                <button class="btn btn-outline-danger btn-wishlist w-50">❤️ Wishlist</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        @endforeach
             </div>
         </div>
-        <a href="{{ route('products') }}" class="btn btn-primary">Lihat Semua Produk</a>
     </div>
+
+    <!-- Code Modal Tasbah Producty Baru -->
+<div class="modal fade" id="tambahProdukModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="tambahProdukModalLabel">Tambah Produk</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <form action="{{ route('products.store') }}" method="POST">
+        @csrf
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="product_name" class="form-label">Nama Produk</label>
+            <input type="text" class="form-control" id="product_name" name="product_name" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="category_id" class="form-label">Kategori</label>
+            <select class="form-control" id="category_id" name="category_id" required>
+              <option value="">Pilih Kategori</option>
+              @foreach ($categories as $cat)
+                <option value="{{ $cat->category_id }}">
+                  {{ $cat->category_name }}
+                </option>
+              @endforeach
+            </select>
+          </div>
+
+          <!-- Lanjutan Code Modal Tambah Product Baru -->
+          <div class="mb-3">
+            <label for="product_price" class="form-label">Harga Produk</label>
+            <input type="number" class="form-control" id="product_price" name="product_price" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="product_stock" class="form-label">Stok Produk</label>
+            <input type="number" class="form-control" id="product_stock" name="product_stock" required>
+          </div>
+
+          <div class="d-flex gap-2">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+              Kembali</button>
+            <button type="submit" class="btn btn-primary">
+              <i class="bi bi-check-circle me-1"></i>Simpan Produk
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
     <div class="modal fade" id="wishlistModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
