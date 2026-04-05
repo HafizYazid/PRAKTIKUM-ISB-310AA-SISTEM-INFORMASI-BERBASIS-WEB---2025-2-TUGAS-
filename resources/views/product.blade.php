@@ -212,6 +212,7 @@
     <section class="py-5 bg-light" id="paket">
         <div class="container">
             <h2 class="text-center mb-5 fw-bold">Paket Membership Kami</h2>
+            </a>
             <div class="row g-4">
                 <!-- Package Basic -->
                 <div class="col-12 col-md-6 col-lg-4">
@@ -271,13 +272,35 @@
                 </div>
             </div>
         </div>
-        <div class="text-center mt-4">
-           <a href="{{ route ('products') }}" class="btn btn-outline-primary mb-4 fw-bold">
-                <i class="bi bi-box-arrow-up-right"></i> Lihat Produk Gym
-            </a>
-        </div>
     </section>
     <!-- Informasi Paket Akhir -->
+    
+    <!-- Produk Per Kategori -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5 fw-bold">Produk Gym Kami</h2>
+            @foreach($products->groupBy('category.category_name') as $categoryName => $categoryProducts)
+            <div class="mb-5">
+                <h3 class="text-center mb-4 fw-bold">{{ $categoryName }}</h3>
+                <div class="row g-4">
+                    @foreach($categoryProducts as $product)
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="card h-100 border-0 shadow-sm product-card">
+                            <div class="card-body text-center">
+                                <h5 class="card-title fw-bold">{{ $product->product_name }}</h5>
+                                <p class="card-text text-muted"> {{ $product->brand->brand_name }}</p>
+                                <p class="card-text text-primary fw-bold">Rp {{ number_format($product->product_price, 0, ',', '.') }}</p>
+                                <p class="card-text text-secondary">Stok: {{ $product->product_stock }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </section>
+    <!-- Akhir Produk Per Kategori -->
 
     <!-- Fasilitas Gym -->
     <section class="py-5">
