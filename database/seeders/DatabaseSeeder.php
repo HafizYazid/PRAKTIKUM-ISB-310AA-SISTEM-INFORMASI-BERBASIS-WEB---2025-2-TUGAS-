@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
                 'product_name' => 'Nike Air Max',
                 'product_price' => 150000,
                 'product_stock' => 10,
+                'product_image' => 'assets/NIKE_P_6000.jpg',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ]

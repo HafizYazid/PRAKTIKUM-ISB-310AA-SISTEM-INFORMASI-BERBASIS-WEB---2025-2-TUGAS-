@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Models\product;
+use App\Models\product as Product;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
@@ -14,9 +14,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $category = Category::all();
-        $products = product::with('category')->get();
-        return view('product', compact('products', 'category'));
+        $categories = Category::all();
+        $products = Product::with('category')->get();
+        return view('product', compact('products', 'categories'));
     }
 
     /**
@@ -32,7 +32,23 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $validateData = $request->validate([
+            'category_id' => 'required|string|max:255',
+            'product_name' => 'required|string|max:255',
+            'product_price' => 'required|numeric',
+            'product_stock' => 'required|integer',
+            'product_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
 
+        if ($request->hasFile('product_image')) {
+            $imagePath = $request->file('product_image')->store('products', 'public');
+
+            $validateData['product_image'] = $imagePath;
+        }
+
+        Product::create($validateData);
+
+        return redirect()->route('products')->with('success', 'Product created successfully.');
     }
 
     /**
@@ -56,7 +72,26 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $product = Product::findOrFail($id);
 
+        $validateData = $request->validate([
+            'category_id' => 'required|string|max:255',
+            'product_name' => 'required|string|max:255',
+            'product_price' => 'required|numeric',
+            'product_stock' => 'required|integer',
+            'product_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        if ($request->hasFile('product_image')) {
+            if ($product->product_image && Storage::disk('public')->exists($product->product_image)) {
+                Storage::disk('public')->delete($product->product_image);
+            }
+
+            $imagePath = $request->file('product_image')->store('products', 'public');
+            $validateData['product_image'] = $imagePath;
+        }
+        $product->update($validateData);
+        return redirect()->route('products')->with('success', 'Product updated successfully.');
     }
 
     /**
@@ -64,6 +99,14 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
+        $product = Product::findOrFail($id);
 
+        if ($product->product_image && Storage::disk('public')->exists($product->product_image)) {
+            Storage::disk('public')->delete($product->product_image);
+        }
+
+        $product->delete();
+
+        return redirect()->route('products')->with('success', 'Product deleted successfully.');
     }
 }

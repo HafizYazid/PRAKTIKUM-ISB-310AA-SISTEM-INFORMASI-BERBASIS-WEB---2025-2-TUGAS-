@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Category;
 
 class product extends Model
 {
@@ -14,6 +15,7 @@ class product extends Model
         'product_name',
         'product_price',
         'product_stock',
+        'product_image',
     ];
 
     public function category(){
