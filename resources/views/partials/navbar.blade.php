@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4 sticky-top">
     <div class="container">
-        <a class="navbar-brand" href="{{ route('home') }}">Toko Sepatu</a>
+        <a class="navbar-brand" href="{{ route('products') }}">Toko Sepatu</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -19,12 +19,18 @@
                     Mode Gelap
                 </button>
 
-                @if (session()->has('user'))
+                @auth
                     <span class="text-white me-3">{{ session('user') }}</span>
-                    <a href="{{ route('logout') }}" class="btn btn-danger btn-sm">Logout</a>
-                @else
-                    <a href="{{ route('login') }}" class="btn btn-warning btn-sm">Login</a>
-                @endif
+                    <form method="POST" action="{{ route('logout') }}" class="d-inline">
+                        @csrf
+                        <button type="submit" class="btn btn-danger btn-sm">Logout</button>
+                    </form>
+                @endauth
+                @guest
+                    <a href="{{ route('login') }}" class="btn btn-warning btn-sm me-2">Login</a>
+                    <a href="{{ route('register') }}" class="btn btn-success btn-sm">Register</a>
+                @endguest
+
             </div>
         </div>
     </div>

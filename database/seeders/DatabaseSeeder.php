@@ -13,28 +13,38 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('categories')->insert([
-            [
-                'category_id' => 1,
-                'category_name'=> 'Sneakers',
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now()
-            ],[
-                'category_id' => 2,
-                'category_name'=> 'Sports',
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now()
-            ]
-        ]);
+        // DB::table('categories')->insert([
+        //     [
+        //         'category_id' => 1,
+        //         'category_name'=> 'Sneakers',
+        //         'created_at' => Carbon::now(),
+        //         'updated_at' => Carbon::now()
+        //     ],[
+        //         'category_id' => 2,
+        //         'category_name'=> 'Sports',
+        //         'created_at' => Carbon::now(),
+        //         'updated_at' => Carbon::now()
+        //     ]
+        // ]);
 
-        DB::table('products')->insert([
+        // DB::table('products')->insert([
+        //     [
+        //         'product_id' => 1,
+        //         'category_id' => 1,
+        //         'product_name' => 'Nike Air Max',
+        //         'product_price' => 150000,
+        //         'product_stock' => 10,
+        //         'product_image' => 'assets/NIKE_P_6000.jpg',
+        //         'created_at' => Carbon::now(),
+        //         'updated_at' => Carbon::now()
+        //     ]
+        // ]);
+
+        DB::table('users')->insert([
             [
-                'product_id' => 1,
-                'category_id' => 1,
-                'product_name' => 'Nike Air Max',
-                'product_price' => 150000,
-                'product_stock' => 10,
-                'product_image' => 'assets/NIKE_P_6000.jpg',
+                'name' => 'Hafiz Yazid',
+                'email' => 'hafizyazid@example.com',
+                'password' => bcrypt('hafiz1234'), // Pastikan untuk menggunakan hash password yang sesuai dalam aplikasi nyata
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ]
