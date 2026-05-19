@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Http;
 
 class RegisteredUserController extends Controller
 {
@@ -30,6 +31,20 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+    
+        $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+            'secret' => env('recapcha_secret_key'),
+            'response' => $request->input('g-recaptcha-response'),
+            'remoteip' => $request->ip(),
+        ]);
+
+        $responseData = $response->json();
+
+        if(!$response->successful() || !$responseData['success']) {
+            return back()->withErrors(['g-recaptcha-response' => 'Recaptcha 
+            verification failed. Please try again.'])->withInput();
+        }
+
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
